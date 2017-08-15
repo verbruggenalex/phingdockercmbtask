@@ -1,0 +1,27 @@
+{
+  "name": "verbruggenalex/phingdockercmbtask",
+  "homepage": "https://github.com/verbruggenalex/phingdockercmbtask",
+  "description": "Docker CarinaMarina Backup task for Phing.",
+  "keywords": ["phing", "docker", "carinamarina", "backup", "restore"],
+  "type": "library",
+  "license": "GPL-2.0+",
+  "support": {
+    "issues": "https://github.com/verbruggenalex/phingdockercmbtask/issues",
+    "source": "https://github.com/verbruggenalex/phingdockercmbtask"
+  },
+  "authors": [
+    {
+      "name": "Verbruggen Alex",
+      "email": "verbruggenalex@gmail.com",
+      "role": "Author"
+    }
+  ],
+  "require": {
+    "phing/phing": "~2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Phing\\CarinaMarinaBackup\\": "src/",
+    }
+  }
+}
