@@ -1,3 +1,4 @@
 <project>
-    <taskdef name="dockercmb" classname="\Phing\CarinaMarinaBackup\Task" />
+    <taskdef name="cm-backup" classname="\Phing\CarinaMarinaBackup\BackupTask" />
+    <taskdef name="cm-restore" classname="\Phing\CarinaMarinaBackup\RestoreTask" />
 </project>
