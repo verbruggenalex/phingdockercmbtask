@@ -99,21 +99,6 @@ class Task extends \ExecTask {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function init() {
-    // Get default properties from project.
-    $properties_mapping = array(
-      'setBin' => 'docker.bin',
-    );
-    foreach ($properties_mapping as $class_method => $docker_property) {
-      if ($property = $this->getProject()->getProperty($behat_property)) {
-        call_user_func(array($this, $class_method), $property);
-      }
-    }
-  }
-
-  /**
    * Configures PHP CodeSniffer.
    */
   public function main() {
@@ -123,17 +108,23 @@ class Task extends \ExecTask {
     }
     $this->commandline->setExecutable($this->bin);
 
-    $this->realCommand = "run --rm  --volumes-from=" . $this->volumesFrom . " carinamarina/backup " . $this->type;
+    //$this->realCommand = "run --rm  --volumes-from=" . $this->volumesFrom . " carinamarina/backup " . $this->type;
 
-    $options = array();
+    $options = array(
+      'run',
+      '--rm',
+      '--volumes-from=' . $this->volumesFrom,
+      'carinamarina/backup',
+      $this->type,
+    );
 
     foreach ($this->options as $option) {
       // Trick to ensure no option duplicates.
       $options[$option->getName()] = $option->toString();
     }
-    // Sort options alphabetically.
-    asort($options);
+
     $this->commandline->addArguments(array_values($options));
+    $this->buildCommand();
     $this->log('Executing command: ' . $this->realCommand);
     parent::main();
   }
@@ -238,9 +229,7 @@ class Task extends \ExecTask {
    * @param string $type
    */
   public function setType($type) {
-    $this->createOption()
-      ->setName('type')
-      ->addText($type);
+    $this->type = $type;
   }
 
   /**
@@ -276,5 +265,36 @@ class Task extends \ExecTask {
   public function createOption() {
     $num = array_push($this->options, new Option());
     return $this->options[$num - 1];
+  }
+
+
+  /**
+   * Check if an option exists.
+   *
+   * @param string $optionName
+   *   The option name.
+   *
+   * @return array|\Phing\Behat\Option[]
+   *   The option if exists, an empty array otherwise.
+   */
+  private function optionExists($optionName) {
+    return array_filter($this->options, function ($option) use ($optionName) {
+      return $option->getName() == $optionName;
+    });
+  }
+  /**
+   * Remove an option.
+   *
+   * @param string $optionName
+   *   The option name.
+   *
+   * @return \Phing\Behat\Option[]
+   *   The option array without the option to remove.
+   */
+  private function optionRemove($optionName) {
+    $this->options = array_filter($this->options, function ($option) use ($optionName) {
+      return $option->getName() != $optionName;
+    });
+    return $this->options;
   }
 }
