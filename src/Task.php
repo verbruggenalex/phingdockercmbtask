@@ -1,10 +1,11 @@
 <?php
 
-namespace Phing\CarinaMarinaBackup;
-
+namespace Phing\CarinaMarina;
 
 /**
- * A Phing task to generate a configuration file for PHP CodeSniffer.
+ * A Docker CarinaMarina Backup task for Phing.
+ *
+ * @package Phing\CarinaMarinaBackup
  */
 class CarinaMarinaBackupTask extends \ExecTask {
 

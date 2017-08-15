@@ -3,9 +3,9 @@
 namespace Phing\CarinaMarinaBackup;
 
 /**
- * Class Option. Represents a Behat CLI option.
+ * Class Option. Represents a Docker CarinaMarina Backup CLI option.
  *
- * @package Phing\Behat
+ * @package Phing\CarinaMarina
  */
 class Option extends \DataType {
 
