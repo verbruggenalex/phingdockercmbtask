@@ -7,7 +7,7 @@ namespace Phing\CarinaMarina;
  *
  * @package Phing\CarinaMarinaBackup
  */
-class CarinaMarinaBackupTask extends \ExecTask {
+class Task extends \ExecTask {
 
   /**
    * All Docker options to be used to create the command.
