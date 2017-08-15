@@ -1,6 +1,6 @@
 <?php
 
-namespace Phing\CarinaMarina;
+namespace Phing\CarinaMarinaBackup;
 
 /**
  * A Docker CarinaMarina Backup task for Phing.
